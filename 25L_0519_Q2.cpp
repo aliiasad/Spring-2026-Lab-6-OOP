@@ -55,7 +55,26 @@ Matrix& Matrix :: operator= (const Matrix& dummy)  {
         delete[] *(matrix + i);
     }
     delete[] matrix;
+
+    size = dummy.size;
+    matrix = new int* [size];
+    for (int i = 0; i < size; i++)  {
+        *(matrix + i) = new int [size];
+        for (int j = 0; j < size; j++)  {
+            *(*(matrix + i) + j) = *(*(dummy.matrix + i) + j);
+        }
+    }
+
+    return *this;
 }
+
+Matrix :: ~Matrix ()    {
+    for (int i = 0; i < size; i++)  {
+        delete[] *(matrix + i);
+    }
+    delete[] matrix;
+}
+
 int main()  {
 
     return 0;
